@@ -1,2 +1,2 @@
 # PDB Format
-column 1-6: ATOM
+Column **1-6**: ATOM
