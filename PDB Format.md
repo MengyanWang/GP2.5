@@ -1,6 +1,7 @@
 # PDB Format
 Column **1-6**: ATOM
-Column **7-11**: Atom Serial Number
+
+Column **7-11**: Atom Serial Number/n
 Column **13-16**: Atom name
 Column **17**: Alternate locaiton indicator
 Column **18-20**:Residue name
