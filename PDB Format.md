@@ -21,7 +21,7 @@ Column **39-46**: Y orthogonal angstom coordinate
 
 Column **47-54**: Z orthognonal angstom coordinate
 
-Column **55-60**: Occupancy: represents the fraction of unit cell occupied by the atom
+Column **55-60**: Occupancy: represents the fraction of unit cell occupied by the atom. The occupancy values typically range from 0 to 1, less than one indicates that they are only partially present in the unit cell, for example, if the atom has multiple conformation, occupancy indicates the ratio of the atom that is present in certain conformation
 
 Column **61-66**: Temperature factor: represents the thermal motion if the atom
 
