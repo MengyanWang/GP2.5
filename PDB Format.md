@@ -25,9 +25,9 @@ Column **55-60**: Occupancy: represents the fraction of unit cell occupied by th
 
 Column **61-66**: Temperature factor: represents the thermal motion if the atom
 
-Column **73-76**: Segment identifier
+Column **73-76**: Segment identifier: is obsolete but still used by some programs.Chimera assigns it as the atom attribute pdbSegment to allow command-line specification
 
-Column **77-78**: Element Symbol
+Column **77-78**: Element Symbol: identifies the type of atom based on its atomic number(C for carbon)````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 
-Column **79-80**: Charge
+Column **79-80**: Charge: charge on the atom
 
