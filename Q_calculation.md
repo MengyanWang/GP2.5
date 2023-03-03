@@ -1,2 +1,4 @@
 # hello
-''' print '''
+''' 
+print 
+'''
