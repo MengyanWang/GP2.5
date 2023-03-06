@@ -147,6 +147,9 @@ This loop allows the script to process multiple pairs of start and end points, a
                 # contains protein, water, even ligand
                 total_residue_list = chain.get_unpacked_list()
                 protein_residue_list = []
+```
+This loop filter out non protein residues. In the context of pdb file format,
+```
                 for all_res in total_residue_list:
                     # print(chain_id)
                     # print(all_res.get_id()[0])
