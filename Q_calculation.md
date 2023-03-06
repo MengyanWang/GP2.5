@@ -38,8 +38,11 @@ def vabs(a):
 Q calculation:  
 - ca_atoms_pdb1, ca_atoms_pdb2: the two structure for comparison  
 - q_type:  
-  * q_type == 0 correspons to the 'CA only' method for calculating the Q,where the contribution of each alpha carbon pair to the Q value is calculated using a Gaussian function with a fixed variance and the 'contact' flag is set to 'False'  
-  * q_type == 1
+  * q_type == 0 corresponds to the 'CA only' method for calculating the Q,where the contribution of each alpha carbon pair to the Q value is calculated using a Gaussian function with a fixed variance and the 'contact' flag is set to 'False'  
+  * q_type == 1 corresponds to the 'all atom' method for calculating the Q, where the contribution of each alpha carbon pair to the Q value is calculated using a Gaussian function with a varying variance depending on the amino acid type and the 'contact' flag is set to 'True'  
+  * q_type == 2 corresponds to the 'side chain' method for calculating the Q, where the contribution of each alpha carbon pair to the Q value is calculated using a different function that takes into account the orientation of the side chains in addition to the distance between alpha carbons
+- sigma_sq: the contribution of the correponding alpha carbon pair to the Q value
+- contact: when is set to True, only alpha carbon pairs that are within a certain distance of each other (specified by the cutoff parameter) are considered in the Q value calculation.The corresponds to the 'all atom' method for calculating the Q values, 
 ```
 # For the equation of calculate the Q value read dx.doi.org/10.1021/jp212541y
     
