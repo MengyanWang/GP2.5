@@ -22,9 +22,9 @@ import sys
 from Bio.PDB.PDBParser import PDBParser
 ```
 Calculate and return the vector that goes from point 'p1' to point 'p2'.  
--p2[0] - p1[0]' calculates the different between the x coordinates of 'p2' and 'p1';  
--p2[1] - p1[1]' calculates the different between the y coordinates of 'p2' and 'p1';  
--p2[2] - p1[2]' calculates the different between the z coordinates of 'p2' and 'p1'.  
+- p2[0] - p1[0]' calculates the different between the x coordinates of 'p2' and 'p1';  
+- p2[1] - p1[1]' calculates the different between the y coordinates of 'p2' and 'p1';  
+- p2[2] - p1[2]' calculates the different between the z coordinates of 'p2' and 'p1'.  
     
 ```
 def vector(p1, p2):
