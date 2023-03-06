@@ -35,10 +35,11 @@ Calculate the magnitude (or length) of a 3D vector 'a' using Pythagorean theorem
 def vabs(a):
     return math.sqrt(pow(a[0], 2) + pow(a[1], 2) + pow(a[2], 2))
 ```
-Q calculation:
-    ca_atoms_pdb1, ca_atoms_pdb2: the two structure for comparison
-    q_type: q_type == 0 correspons to the 'CA only' method for calculating the Q,where the contribution of each alpha carbon pair to the Q value is calculated using a Gaussian function with a fixed variance and the 'contact' flag is set to 'False'
-            q_type == 1
+Q calculation:  
+    - ca_atoms_pdb1, ca_atoms_pdb2: the two structure for comparison  
+    - q_type:  
+        * q_type == 0 correspons to the 'CA only' method for calculating the Q,where the contribution of each alpha carbon pair to the Q value is calculated using a Gaussian function with a fixed variance and the 'contact' flag is set to 'False'  
+        * q_type == 1
 ```
 # For the equation of calculate the Q value read dx.doi.org/10.1021/jp212541y
     
