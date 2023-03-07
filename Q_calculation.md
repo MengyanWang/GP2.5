@@ -148,7 +148,7 @@ This loop allows the script to process multiple pairs of start and end points, a
                 total_residue_list = chain.get_unpacked_list()
                 protein_residue_list = []
 ```
-This loop filter out non protein residues. In the context of pdb file format,
+This loop filter out non protein residues. In the context of pdb file format, the 'id' field of a residue is a tuple of three values:'(hetero_flag,sequence_identifier,insertion_code)'. For standard amino acid or nucleic acid residues, ther 'hetero_flag' is a space character, represent in the pdb file format as ' '. So 'all_res.get_id()[0]' is checking whether the residue is a protein residue.
 ```
                 for all_res in total_residue_list:
                     # print(chain_id)
@@ -187,6 +187,9 @@ This loop filter out non protein residues. In the context of pdb file format,
                     start = int(first_residue.get_id()[1])
                 else:
                     start = int(start_pair[pair_index])
+```
+has_id is being used to check whether a particular residue has both a 'CA' and an 'O' atom, which is typically true for standard amino acid residues.
+```
                 for res in protein_residue_list:
                     is_regular_res = (res.has_id('CA') and res.has_id('O')) or (res.get_id()[1] == end and res.has_id(
                         'CA'))  # Some pdbs lack the O atom of the last one residue...interesting, now fixed bug and correctly pick last residue
@@ -214,6 +217,9 @@ This loop filter out non protein residues. In the context of pdb file format,
                                     # Some fxxking pdbs lost residues halfway
                             last_sequence_id = sequence_id
                             # print(res.get_id())
+```
+Read alpha carbon coordination
+```
                         if sequence_id >= start and sequence_id <= end:
                             ca_atoms_pdb[sequence_id] = res[
                                 'CA'].get_coord()  # Biopython only gets first CA if occupancy is not 1
@@ -296,7 +302,9 @@ def main():
     length_total_chains = []
     sum_q = 0
 ```
-
+"ca_atoms_pdb1_all_chain" contains C-alpha atom coordinates for different chains in two different PDB files. The 'zip' function is used to iterate over the two dictionaries in parallel.  
+Keys are sequence identifiers, the 'sorted()' function are used to make sure that the atoms are processed in the same order in both files.
+```
     for each_chain_atoms_pdb1, each_chain_atoms_pdb2 in zip(ca_atoms_pdb1_all_chain.values(), ca_atoms_pdb2_all_chain.values()):
         sorted_keys1 = sorted(each_chain_atoms_pdb1.keys())
         sorted_keys2 = sorted(each_chain_atoms_pdb2.keys())
@@ -316,6 +324,9 @@ def main():
                     print("The two pdb have same residue range but different length.\
                     So there are some residues lost in the halfway. Now checking...")
                 difference = sorted_keys1[0] - sorted_keys2[0]
+```
+This loop checks if there is a corresponding residue in 'sorted_key2' for residues in 'sorted_key1'.If not, it's removed from 'each_chain_atoms_pdb1'
+```
                 for i in sorted_keys1:
                     if i - difference in sorted_keys2:
                         continue
@@ -325,6 +336,9 @@ def main():
                                 "The residue %s in protein1 has no corresponding residue in protein2, the value of it %s has been removed" % (
                                     i, each_chain_atoms_pdb1[i]))
                         each_chain_atoms_pdb1.pop(i)
+```
+This loop checks if there is a corresponding residue in 'sorted_key1' for residues in 'sorted_key2'.If not, it's removed from 'each_chain_atoms_pdb2'
+```
                 for j in sorted_keys2:
                     if j + difference in sorted_keys1:
                         continue
@@ -343,7 +357,9 @@ def main():
                 print(each_chain_atoms_pdb2.keys())
                 print(len(each_chain_atoms_pdb2))
                 exit()
-
+```
+'new_each_chain_atoms_pdb1' is the new chain that only contains paired residues
+```
         new_each_chain_atoms_pdb1 = {
             i + 1: each_chain_atoms_pdb1[k] for i, k in enumerate(sorted(each_chain_atoms_pdb1.keys()))}
         # print(new_ca_atoms_pdb1.keys())  # Check the number whether start from 1 and match the length
@@ -353,7 +369,9 @@ def main():
         # Since we trim the model so the real residue number may not work, if we have same length just reorder from 0
         # https://stackoverflow.com/questions/39126272/reset-new-keys-to-a-dictionary
         # print(new_each_chain_atoms_pdb1)
-
+```
+Q Calculation
+```
         sigma_sq = calc_sigma_sq(new_each_chain_atoms_pdb1)
 
         if len(new_each_chain_atoms_pdb1) > 0:
